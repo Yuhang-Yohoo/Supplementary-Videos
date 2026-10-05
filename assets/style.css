@@ -1,0 +1,27 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #18263a; background: #f3f6fa; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+header, main, footer { max-width: 1240px; margin: auto; padding: 28px; }
+header { padding-top: 52px; }
+h1 { font-size: clamp(2rem, 5vw, 3.3rem); margin: 8px 0; letter-spacing: -.04em; }
+header > p:last-child, .muted, #description { color: #58677a; line-height: 1.6; }
+.eyebrow { color: #2865b2; font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
+main { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; padding-top: 8px; }
+aside, section { background: white; border: 1px solid #dee5ee; border-radius: 16px; padding: 22px; }
+label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 8px; }
+select, input { width: 100%; padding: 11px; border: 1px solid #bdc9d8; border-radius: 8px; background: white; color: inherit; font: inherit; margin-bottom: 20px; }
+button, a { font: inherit; }
+button { cursor: pointer; }
+.video-item { width: 100%; padding: 14px; margin-bottom: 10px; text-align: left; background: #f7f9fc; border: 1px solid #dee5ee; border-radius: 9px; color: inherit; }
+.video-item span { display: block; font-size: .78rem; color: #58677a; margin-top: 6px; }
+.video-item[aria-current="true"] { border-color: #2865b2; background: #eaf2fd; }
+video { width: 100%; aspect-ratio: 16/9; background: #101722; border-radius: 10px; }
+h2 { margin: 8px 0; font-size: 1.5rem; }
+a { color: #205da7; text-underline-offset: 3px; }
+#actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
+#actions[hidden] { display: none; }
+#share { padding: 9px 15px; border: 1px solid #bdc9d8; border-radius: 8px; background: white; color: #205da7; }
+#status { font-size: .85rem; min-height: 1.3em; }
+:focus-visible { outline: 3px solid #2865b2; outline-offset: 3px; }
+footer { font-size: .85rem; padding-bottom: 40px; }
+@media (max-width: 760px) { main { grid-template-columns: 1fr; } header, main, footer { padding-left: 16px; padding-right: 16px; } header { padding-top: 30px; } aside, section { padding: 16px; } }

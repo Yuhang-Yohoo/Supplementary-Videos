@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supplementary research videos organized by project.">
+  <title>Supplementary Videos</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <header><p class="eyebrow">RESEARCH VIDEO LIBRARY</p><h1>Supplementary Videos</h1><p>Explore demonstrations and supplementary material by project.</p></header>
+  <main>
+    <aside aria-label="Video library">
+      <label for="group">Project</label><select id="group"><option value="">All projects</option></select>
+      <label for="search">Search videos</label><input id="search" type="search" placeholder="Title, project, or description">
+      <p id="count" class="muted" aria-live="polite"></p>
+      <div id="list"></div>
+    </aside>
+    <section aria-label="Video player">
+      <video id="player" controls playsinline preload="metadata" aria-label="Selected supplementary video"></video>
+      <p id="project" class="eyebrow"></p><h2 id="title">Loading library…</h2><p id="description"></p>
+      <div id="actions" hidden><a id="download" download>Download video</a><button id="share" type="button">Copy link</button></div>
+      <p id="status" role="status"></p>
+    </section>
+  </main>
+  <footer><a href="https://github.com/Yuhang-Yohoo/Supplementary-Videos">View repository on GitHub</a></footer>
+</body>
+</html>
