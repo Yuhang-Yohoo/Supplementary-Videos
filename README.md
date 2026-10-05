@@ -4,6 +4,16 @@ A dedicated library for supplementary research videos, with a static GitHub Page
 
 Website: https://yuhang-yohoo.github.io/Supplementary-Videos/
 
+## Scan to visit
+
+<img src="assets/site-qr.svg" alt="QR code for the Supplementary Videos website" width="180" height="180">
+
+Scan this QR code to open the video library on your phone.
+
+[Download QR code (SVG)](https://yuhang-yohoo.github.io/Supplementary-Videos/assets/site-qr.svg)
+
+To save the SVG, right-click the download link and choose **Save link as…**.
+
 ## Add a video
 
 1. Place the video in `videos/<project>/`. Prefer browser-compatible MP4 (H.264 video and AAC audio).
