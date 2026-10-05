@@ -6,6 +6,10 @@ header { padding-top: 52px; }
 h1 { font-size: clamp(2rem, 5vw, 3.3rem); margin: 8px 0; letter-spacing: -.04em; }
 header > p:last-child, .muted, #description { color: #58677a; line-height: 1.6; }
 .eyebrow { color: #2865b2; font-size: .75rem; font-weight: 700; letter-spacing: .12em; }
+.library-brand { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+.library-brand .eyebrow { margin: 0; }
+.brand-of { letter-spacing: normal; margin-left: 5px; }
+.brand-logo { display: block; width: 156px; max-width: 100%; height: auto; }
 main { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; padding-top: 8px; }
 aside, section { background: white; border: 1px solid #dee5ee; border-radius: 16px; padding: 22px; }
 label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 8px; }
