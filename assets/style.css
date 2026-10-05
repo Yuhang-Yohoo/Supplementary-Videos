@@ -27,5 +27,8 @@ a { color: #205da7; text-underline-offset: 3px; }
 #share { padding: 9px 15px; border: 1px solid #bdc9d8; border-radius: 8px; background: white; color: #205da7; }
 #status { font-size: .85rem; min-height: 1.3em; }
 :focus-visible { outline: 3px solid #2865b2; outline-offset: 3px; }
-footer { font-size: .85rem; padding-bottom: 40px; }
+footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; font-size: .85rem; padding-bottom: 40px; }
+.site-qr { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+.site-qr img { display: block; background: white; border: 1px solid #dee5ee; border-radius: 8px; }
+.site-qr p { margin: 0 0 8px; color: #58677a; }
 @media (max-width: 760px) { main { grid-template-columns: 1fr; } header, main, footer { padding-left: 16px; padding-right: 16px; } header { padding-top: 30px; } aside, section { padding: 16px; } }
