@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Research Gallery of YuHang Zhao: research demonstrations organized by project.">
+  <meta name="description" content="Research Gallery of YuHang Zhao: videos and posters organized by project and work.">
   <title>Research Gallery | YuHang Zhao</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <script src="assets/app.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=gallery-2">
+  <script src="assets/app.js?v=gallery-2" defer></script>
 </head>
 <body>
   <header>
@@ -19,24 +19,26 @@
     <img class="brand-logo" src="assets/daedalus-logo.png" alt="Daedalus Research Center" width="727" height="187">
   </header>
   <main>
-    <aside aria-label="Video library">
+    <aside aria-label="Research gallery">
       <label for="group">Project</label><select id="group"><option value="">All projects</option></select>
-      <label for="search">Search videos</label><input id="search" type="search" placeholder="Title, project, or description">
+      <label for="work">Work</label><select id="work"><option value="">All works</option></select>
       <p id="count" class="muted" aria-live="polite"></p>
       <div id="list"></div>
     </aside>
-    <section aria-label="Video player">
-      <video id="player" controls playsinline preload="metadata" aria-label="Selected supplementary video"></video>
-      <p id="project" class="eyebrow"></p><h2 id="title">Loading library…</h2><p id="description"></p>
-      <div id="actions" hidden><a id="download" download>Download video</a><button id="share" type="button">Copy link</button></div>
+    <section aria-label="Selected gallery item">
+      <video id="player" controls playsinline preload="metadata" aria-label="Selected research video" hidden></video>
+      <img id="poster" alt="" hidden>
+      <iframe id="poster-pdf" title="Selected research poster" hidden></iframe>
+      <p id="project" class="eyebrow"></p><h2 id="title">Loading gallery…</h2><p id="item-type" class="item-type"></p><p id="description"></p>
+      <div id="actions" hidden><a id="download" download>Download item</a><button id="share" type="button">Copy link</button></div>
       <p id="status" role="status"></p>
     </section>
   </main>
   <footer>
     <a href="https://github.com/Yuhang-Yohoo/Supplementary-Videos">View repository on GitHub</a>
     <div class="site-qr">
-      <a href="https://yuhang-yohoo.github.io/Supplementary-Videos/" aria-label="Open the video library">
-        <img src="assets/site-qr.svg" width="144" height="144" alt="QR code for the Supplementary Videos website">
+      <a href="https://yuhang-yohoo.github.io/Supplementary-Videos/" aria-label="Open the research gallery">
+        <img src="assets/site-qr.svg" width="144" height="144" alt="QR code for the Research Gallery website">
       </a>
       <div><p>Scan to open on your phone</p><a href="assets/site-qr.svg" download="supplementary-videos-qr.svg">Download QR code</a></div>
     </div>
