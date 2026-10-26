@@ -1,0 +1,21 @@
+{
+  "id": "d-localization",
+  "project": "MINERVA",
+  "work": "d-localization",
+  "items": [
+    {
+      "id": "geo-aware-localization",
+      "type": "video",
+      "title": "Geo-aware localization",
+      "description": "Demonstration of Geo-aware localization.",
+      "src": "video/geo-aware-localization.mp4"
+    },
+    {
+      "id": "d-localization-poster",
+      "type": "poster",
+      "title": "Range–IMU Localization under Degenerate Geometry",
+      "description": "Research poster on geometry-aware range–IMU localization.",
+      "src": "paper-poster.pdf"
+    }
+  ]
+}

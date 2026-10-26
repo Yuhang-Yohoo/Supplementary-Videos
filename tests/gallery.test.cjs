@@ -86,7 +86,7 @@ async function boot(data = catalog, query = '', options = {}) {
   assert.equal(live.get('player').src, 'https://content.example/work-0/video/demo.mp4');
   assert.equal(registry[0].id, 'd-localization');
   assert.equal(registry[0].repository, 'https://github.com/Yuhang-Yohoo/Geo-awared-localization');
-  assert.equal(registry[0].manifest, 'https://yuhang-yohoo.github.io/d-localization-gallery/gallery.json');
+  assert.equal(registry[0].manifest, 'content/d-localization/gallery.json');
   assert.equal(fs.existsSync(path.join(root, 'videos.json')), false);
   assert.equal(fs.existsSync(path.join(root, 'videos/geo-aware-localization/geo-aware-localization.mp4')), false);
 
@@ -173,5 +173,22 @@ async function boot(data = catalog, query = '', options = {}) {
   }
   const badRegistry = await boot(catalog, '', { registry: [{ id: 'missing-manifest' }] });
   assert.equal(badRegistry.get('title').textContent, 'Unable to load gallery');
+  const pageUrl = 'https://yuhang-yohoo.github.io/Supplementary-Videos/';
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, registry[0].manifest), 'utf8'));
+  const manifestUrl = new URL(registry[0].manifest, pageUrl).href;
+  const actual = { URL, console, location: { href: pageUrl }, fetch: async url => ({ ok: true, json: async () => {
+    if (url === 'sources.json') return registry;
+    assert.equal(url, manifestUrl);
+    return manifest;
+  }}) };
+  vm.runInNewContext(loader, actual);
+  const loaded = await actual.loadCatalog();
+  assert.equal(loaded.catalog.length, 2);
+  assert.equal(loaded.unavailable, 0);
+  for (const item of loaded.catalog) {
+    assert.ok(item.src.startsWith(pageUrl + 'content/d-localization/'));
+    const relative = decodeURIComponent(new URL(item.src).pathname.slice(new URL(pageUrl).pathname.length));
+    assert.ok(fs.existsSync(path.join(root, relative)), relative);
+  }
   console.log('Passed: remote catalog loading and media resolution, project/work filters, mixed video/image/PDF items, media cleanup, current and legacy links, partial/offline sources, empty and invalid catalogs.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

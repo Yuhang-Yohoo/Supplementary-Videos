@@ -1,6 +1,6 @@
 # Research Gallery
 
-A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **d-localization**. Each work manages its catalog and media in its own repository; this repository contains the gallery interface and source registry.
+A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **d-localization**. Each work manages its original content in its own repository; this public repository contains the gallery interface, source registry, and selected published media under `content/<work>/`.
 
 Website: https://yuhang-yohoo.github.io/Supplementary-Videos/
 
@@ -23,7 +23,7 @@ To save the SVG, right-click the download link and choose **Save link as…**.
   {
     "id": "d-localization",
     "repository": "https://github.com/Yuhang-Yohoo/Geo-awared-localization",
-    "manifest": "https://yuhang-yohoo.github.io/d-localization-gallery/gallery.json"
+    "manifest": "content/d-localization/gallery.json"
   }
 ]
 ```
@@ -32,7 +32,20 @@ The repository URL is management metadata and is not rendered in the gallery int
 
 ## Update a video or poster
 
-Update the asset or its entry in `gallery.json` in the **work repository**, commit and push there, then run `python .github/scripts/publish-gallery.py` from that repository. After GitHub Pages deploys the approved files, visitors see the updates when they reload this page. No gallery code change or copy of the media is needed here.
+Update the asset or its entry in `gallery.json` in the **work repository**, commit and push there, then run `python .github/scripts/publish-gallery.py` from that repository. The script fetches this repository, updates only `content/d-localization/`, and commits and pushes those files. The gallery interface and other works are preserved. After GitHub Pages deploys, visitors see the updates when they reload this page. Pull the latest commits in a separate local gallery checkout after publishing.
+
+The published layout is:
+
+```text
+Supplementary-Videos/
+├── index.html
+├── assets/
+├── sources.json
+└── content/d-localization/
+    ├── gallery.json
+    ├── paper-poster.pdf
+    └── video/geo-aware-localization.mp4
+```
 
 The d-localization catalog has this structure:
 
@@ -57,15 +70,15 @@ Posters use `"type": "poster"` and can point to an image or a PDF. The Project d
 
 ## Add a work
 
-Publish the new work's `gallery.json` and selected media at browser-accessible HTTPS URLs, then register its unique ID, repository URL, and catalog URL in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all work repositories. Cross-origin catalog hosts must allow this gallery to fetch their JSON; GitHub Pages project sites under the same `github.io` hostname share an origin.
+Publish the new work's `gallery.json` and selected media under `content/<work>/`, then register its unique ID, source repository URL, and relative catalog path in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all works. External HTTPS catalog URLs remain supported; cross-origin hosts must allow this gallery to fetch their JSON.
 
-A private repository cannot be fetched directly by public visitors. For d-localization, a local publishing command synchronizes only the approved catalog, video, and poster to the public `d-localization-gallery` delivery repository using the maintainer's existing Git credentials. GitHub Pages serves that copy. The private manuscript and source files stay private, and the main gallery stores no media. See `GALLERY.md` in the source repository for the exact allowlist. Do not add access tokens to the registry or browser code.
+A private repository cannot be fetched directly by public visitors. For d-localization, the local publishing command copies only the approved catalog, video, and poster into this public gallery using the maintainer's existing Git credentials. The private manuscript and source files stay in the private work repository. See `GALLERY.md` there for the exact allowlist. No separate delivery repository or new publishing credentials are needed.
 
 Keep IDs stable so shared links continue to work. Link to any item with `?item=<id>`; existing `?video=<id>` links are also supported:
 
 https://yuhang-yohoo.github.io/Supplementary-Videos/?item=geo-aware-localization
 
-Media files are not stored in this gallery repository. Work repositories can also point to external HTTPS media hosts when needed.
+Published media copies are stored in this gallery repository. Their editable originals and any private research sources remain in the work repositories.
 
 ## Enable GitHub Pages
 

@@ -2,6 +2,6 @@
   {
     "id": "d-localization",
     "repository": "https://github.com/Yuhang-Yohoo/Geo-awared-localization",
-    "manifest": "https://yuhang-yohoo.github.io/d-localization-gallery/gallery.json"
+    "manifest": "content/d-localization/gallery.json"
   }
 ]
