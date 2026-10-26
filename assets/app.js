@@ -33,7 +33,14 @@ function renderList() {
     button.setAttribute('aria-current', String(item.id === selectedId));
     button.textContent = item.title;
     const details = document.createElement('span');
-    details.textContent = `${typeLabel(item)} · ${item.project}`;
+    details.className = 'item-details';
+    const badge = document.createElement('strong');
+    badge.className = `type-badge type-badge--${item.type}`;
+    badge.textContent = typeLabel(item);
+    const project = document.createElement('span');
+    project.textContent = item.project;
+    details.append(badge);
+    details.append(project);
     button.append(details);
     button.addEventListener('click', () => selectItem(item));
     byId('list').append(button);
