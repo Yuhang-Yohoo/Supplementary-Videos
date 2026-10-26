@@ -1,7 +1,7 @@
 {
   "id": "d-localization",
   "project": "MINERVA",
-  "work": "d-localization",
+  "work": "Geo-aware localization",
   "items": [
     {
       "id": "geo-aware-localization",

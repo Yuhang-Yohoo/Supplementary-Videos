@@ -8,7 +8,7 @@ const loader = fs.readFileSync(path.join(root, 'assets/catalog.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const registry = JSON.parse(fs.readFileSync(path.join(root, 'sources.json'), 'utf8'));
 const catalog = [{
-  id: 'geo-aware-localization', project: 'MINERVA', work: 'd-localization',
+  id: 'geo-aware-localization', project: 'MINERVA', work: 'Geo-aware localization',
   title: 'Geo-aware localization', type: 'video', src: 'video/demo.mp4'
 }];
 
@@ -75,7 +75,7 @@ async function boot(data = catalog, query = '', options = {}) {
   const live = await boot();
   assert.equal(live.get('group').value, 'MINERVA');
   assert.equal(live.get('work').value, '');
-  assert.equal(live.get('work').children[1].value, 'd-localization');
+  assert.equal(live.get('work').children[1].value, 'Geo-aware localization');
   assert.equal(live.get('count').textContent, '1 item');
   assert.equal(live.get('project').textContent, 'MINERVA');
   assert.equal(live.get('title').textContent, 'Geo-aware localization');
@@ -93,7 +93,7 @@ async function boot(data = catalog, query = '', options = {}) {
   for (const query of ['?video=icra27-4954-vi-i', '?video=geo-aware-localization', '?item=geo-aware-localization']) {
     const linked = await boot(catalog, query + '&keep=yes#details');
     assert.equal(linked.get('status').textContent, '');
-    assert.equal(linked.get('work').value, 'd-localization');
+    assert.equal(linked.get('work').value, 'Geo-aware localization');
     const url = new URL(linked.location.href);
     assert.equal(url.searchParams.get('item'), 'geo-aware-localization');
     assert.equal(url.searchParams.has('video'), false);
@@ -112,8 +112,8 @@ async function boot(data = catalog, query = '', options = {}) {
   gallery.get('group').value = 'MINERVA';
   gallery.get('group').events.change();
   assert.equal(gallery.get('count').textContent, '3 items');
-  assert.deepEqual(gallery.get('work').children.map(option => option.value), ['', 'Another work', 'd-localization']);
-  gallery.get('work').value = 'd-localization';
+  assert.deepEqual(gallery.get('work').children.map(option => option.value), ['', 'Another work', 'Geo-aware localization']);
+  gallery.get('work').value = 'Geo-aware localization';
   gallery.get('work').events.change();
   assert.equal(gallery.get('count').textContent, '2 items');
   gallery.get('list').children[1].events.click();
@@ -175,6 +175,7 @@ async function boot(data = catalog, query = '', options = {}) {
   assert.equal(badRegistry.get('title').textContent, 'Unable to load gallery');
   const pageUrl = 'https://yuhang-yohoo.github.io/Supplementary-Videos/';
   const manifest = JSON.parse(fs.readFileSync(path.join(root, registry[0].manifest), 'utf8'));
+  assert.equal(manifest.work, 'Geo-aware localization');
   const manifestUrl = new URL(registry[0].manifest, pageUrl).href;
   const actual = { URL, console, location: { href: pageUrl }, fetch: async url => ({ ok: true, json: async () => {
     if (url === 'sources.json') return registry;

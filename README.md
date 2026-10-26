@@ -1,6 +1,6 @@
 # Research Gallery
 
-A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **d-localization**. Each work manages its original content in its own repository; this public repository contains the gallery interface, source registry, and selected published media under `content/<work>/`.
+A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **Geo-aware localization**. Each work manages its original content in its own repository; this public repository contains the gallery interface, source registry, and selected published media under `content/<work>/`.
 
 Website: https://yuhang-yohoo.github.io/Supplementary-Videos/
 
@@ -47,13 +47,13 @@ Supplementary-Videos/
     └── video/geo-aware-localization.mp4
 ```
 
-The d-localization catalog has this structure:
+The Geo-aware localization catalog has this structure:
 
 ```json
 {
   "id": "d-localization",
   "project": "MINERVA",
-  "work": "d-localization",
+  "work": "Geo-aware localization",
   "items": [
     {
       "id": "geo-aware-localization",
@@ -72,7 +72,7 @@ Posters use `"type": "poster"` and can point to an image or a PDF. The Project d
 
 Publish the new work's `gallery.json` and selected media under `content/<work>/`, then register its unique ID, source repository URL, and relative catalog path in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all works. External HTTPS catalog URLs remain supported; cross-origin hosts must allow this gallery to fetch their JSON.
 
-A private repository cannot be fetched directly by public visitors. For d-localization, the local publishing command copies only the approved catalog, video, and poster into this public gallery using the maintainer's existing Git credentials. The private manuscript and source files stay in the private work repository. See `GALLERY.md` there for the exact allowlist. No separate delivery repository or new publishing credentials are needed.
+A private repository cannot be fetched directly by public visitors. For Geo-aware localization, the local publishing command copies only the approved catalog, video, and poster into this public gallery using the maintainer's existing Git credentials. The private manuscript and source files stay in the private work repository. See `GALLERY.md` there for the exact allowlist. No separate delivery repository or new publishing credentials are needed.
 
 Keep IDs stable so shared links continue to work. Link to any item with `?item=<id>`; existing `?video=<id>` links are also supported:
 
