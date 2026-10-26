@@ -34,7 +34,7 @@ Example entry:
 
 Keep IDs stable so shared links continue to work. A video can be linked directly with `?video=<id>`:
 
-https://yuhang-yohoo.github.io/Supplementary-Videos/?video=icra27-4954-vi-i
+https://yuhang-yohoo.github.io/Supplementary-Videos/?video=geo-aware-localization
 
 External HTTPS video URLs are also supported in `src` if the library outgrows repository storage. Ordinary GitHub Git uploads must stay within the [file size limits](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github); files above 100 MiB are blocked. Git LFS is not supported by GitHub Pages, so use suitable external hosting for large videos.
 
