@@ -2,6 +2,9 @@
 const byId = id => document.getElementById(id);
 let videos = [];
 let selectedId = '';
+const legacyVideoIds = new Map([
+  ['icra27-4954-vi-i', 'geo-aware-localization']
+]);
 
 function renderList() {
   const query = byId('search').value.trim().toLowerCase();
@@ -82,8 +85,10 @@ async function init() {
       return;
     }
     const requested = new URL(location.href).searchParams.get('video');
-    selectVideo(videos.find(v => v.id === requested) || videos[0]);
-    if (requested && !ids.has(requested)) byId('status').textContent = 'Requested video was not found. Showing the first video.';
+    const requestedId = legacyVideoIds.get(requested) || requested;
+    const requestedVideo = videos.find(v => v.id === requestedId);
+    selectVideo(requestedVideo || videos[0]);
+    if (requested && !requestedVideo) byId('status').textContent = 'Requested video was not found. Showing the first video.';
   } catch (error) {
     byId('title').textContent = 'Unable to load library';
     byId('status').textContent = `${error.message} For local preview, open this site through an HTTP server.`;

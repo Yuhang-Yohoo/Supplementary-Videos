@@ -1,9 +1,9 @@
 [
   {
     "id": "geo-aware-localization",
-    "group": "geo-aware localization",
-    "title": "geo-aware localization",
-    "description": "Demonstration of geo-aware localization.",
+    "group": "Geo-aware localization",
+    "title": "Geo-aware localization",
+    "description": "Demonstration of Geo-aware localization.",
     "src": "videos/geo-aware-localization/geo-aware-localization.mp4"
   }
 ]
