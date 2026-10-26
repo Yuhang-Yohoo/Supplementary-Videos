@@ -118,20 +118,7 @@ byId('share').addEventListener('click', async () => {
 
 async function init() {
   try {
-    const response = await fetch('videos.json', { cache: 'no-cache' });
-    if (!response.ok) throw new Error('Unable to load gallery catalog.');
-    const catalog = await response.json();
-    const ids = new Set();
-    if (!Array.isArray(catalog)) throw new Error('Gallery catalog must be an array.');
-    for (const item of catalog) {
-      if (!item || !['id', 'project', 'work', 'title', 'src'].every(key => typeof item[key] === 'string' && item[key].trim()) || ids.has(item.id)) {
-        throw new Error('Each item needs a unique id, project, work, title, and src.');
-      }
-      if (!['video', 'poster'].includes(item.type)) throw new Error('Each item must be a video or poster.');
-      const source = new URL(item.src, location.href);
-      if (!['http:', 'https:'].includes(source.protocol)) throw new Error('Unsupported item URL.');
-      ids.add(item.id);
-    }
+    const { catalog, unavailable } = await loadCatalog();
     items = catalog;
     const projects = [...new Set(items.map(item => item.project))].sort();
     for (const project of projects) byId('group').add(new Option(project, project));
@@ -148,9 +135,11 @@ async function init() {
       refreshSelection();
       if (requested && items.length) byId('status').textContent = 'Requested item was not found. Showing the first item.';
     }
+    if (unavailable && !byId('status').textContent) byId('status').textContent = 'Some works are temporarily unavailable. Showing available items.';
   } catch (error) {
+    console.error(error);
     byId('title').textContent = 'Unable to load gallery';
-    byId('status').textContent = `${error.message} For local preview, open this site through an HTTP server.`;
+    byId('status').textContent = 'The gallery is temporarily unavailable. Please try again later.';
   }
 }
 init();
