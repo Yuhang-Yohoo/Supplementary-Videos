@@ -37,7 +37,7 @@ function selectVideo(video, updateUrl = true) {
   byId('download').href = video.src;
   byId('actions').hidden = false;
   byId('status').textContent = '';
-  document.title = `${video.title} | Supplementary Videos`;
+  document.title = `${video.title} | Research Gallery`;
   if (updateUrl) {
     const url = new URL(location.href);
     url.searchParams.set('video', video.id);
