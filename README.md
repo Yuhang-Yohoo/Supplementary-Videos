@@ -1,6 +1,6 @@
 # Research Gallery
 
-A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **Geo-aware localization**. Each work manages its original content in its own repository; this public repository contains the gallery interface, source registry, and selected published media under `content/<work>/`.
+A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **Geo-aware localization**. Each work manages and publishes its selected content from its own repository. This public repository contains the gallery interface and source registry.
 
 Website: https://yuhang-yohoo.github.io/Supplementary-Videos/
 
@@ -23,7 +23,7 @@ To save the SVG, right-click the download link and choose **Save link as…**.
   {
     "id": "d-localization",
     "repository": "https://github.com/Yuhang-Yohoo/Geo-awared-localization",
-    "manifest": "content/d-localization/gallery.json"
+    "manifest": "https://yuhang-yohoo.github.io/Geo-awared-localization/gallery.json"
   }
 ]
 ```
@@ -32,19 +32,18 @@ The repository URL is management metadata and is not rendered in the gallery int
 
 ## Update a video or poster
 
-Update the asset or its entry in `gallery.json` in the **work repository**, commit and push there, then run `python .github/scripts/publish-gallery.py` from that repository. The script fetches this repository, updates only `content/d-localization/`, and commits and pushes those files. The gallery interface and other works are preserved. After GitHub Pages deploys, visitors see the updates when they reload this page. Pull the latest commits in a separate local gallery checkout after publishing.
+Update the asset or its entry in `gallery.json` in the **work repository**, then commit and push to its `main` branch. Its **Publish gallery content** GitHub Actions workflow tests and deploys the approved catalog and media directly to that repository's Pages site. Once deployment completes, visitors see the updates on reloading the gallery. No local publishing script, media copy, or commit in this gallery repository is needed.
 
-The published layout is:
+The two active repositories have these responsibilities:
 
 ```text
-Supplementary-Videos/
-├── index.html
-├── assets/
-├── sources.json
-└── content/d-localization/
-    ├── gallery.json
-    ├── paper-poster.pdf
-    └── video/geo-aware-localization.mp4
+Geo-awared-localization (private repository)
+  -> GitHub Actions publishes only gallery.json, video, poster, and .nojekyll
+  -> https://yuhang-yohoo.github.io/Geo-awared-localization/
+
+Supplementary-Videos (public gallery)
+  -> index.html, assets/, sources.json
+  -> loads the work's public Pages catalog and media
 ```
 
 The Geo-aware localization catalog has this structure:
@@ -70,15 +69,15 @@ Posters use `"type": "poster"` and can point to an image or a PDF. The Project d
 
 ## Add a work
 
-Publish the new work's `gallery.json` and selected media under `content/<work>/`, then register its unique ID, source repository URL, and relative catalog path in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all works. External HTTPS catalog URLs remain supported; cross-origin hosts must allow this gallery to fetch their JSON.
+Publish the new work's `gallery.json` and selected media from its repository's Pages site, then register its unique ID, source repository URL, and published catalog URL in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all works. Relative catalog paths and other HTTPS hosts remain supported; cross-origin hosts must allow this gallery to fetch their JSON.
 
-A private repository cannot be fetched directly by public visitors. For Geo-aware localization, the local publishing command copies only the approved catalog, video, and poster into this public gallery using the maintainer's existing Git credentials. The private manuscript and source files stay in the private work repository. See `GALLERY.md` there for the exact allowlist. No separate delivery repository or new publishing credentials are needed.
+The Geo-aware localization repository remains private. Its workflow publishes only the explicitly approved catalog, video, poster, and empty `.nojekyll`, using GitHub's temporary Pages deployment token. The manuscript, LaTeX sources, graphics directory, and repository metadata remain private. See `GALLERY.md` in the work repository for the exact allowlist. No separate delivery repository, deploy key, or cross-repository secret is needed.
 
 Keep IDs stable so shared links continue to work. Link to any item with `?item=<id>`; existing `?video=<id>` links are also supported:
 
 https://yuhang-yohoo.github.io/Supplementary-Videos/?item=geo-aware-localization
 
-Published media copies are stored in this gallery repository. Their editable originals and any private research sources remain in the work repositories.
+Media is served directly from each work's Pages site. The previous media copies in this gallery repository and local cross-repository publishing script have been retired; the former intermediary repository remains archived.
 
 ## Enable GitHub Pages
 
