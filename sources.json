@@ -3,5 +3,10 @@
     "id": "d-localization",
     "repository": "https://github.com/Yuhang-Yohoo/Geo-awared-localization",
     "manifest": "https://yuhang-yohoo.github.io/Geo-awared-localization/gallery.json"
+  },
+  {
+    "id": "robust-localization",
+    "repository": "https://github.com/Yuhang-Yohoo/robust_localization",
+    "manifest": "https://yuhang-yohoo.github.io/robust_localization/gallery.json"
   }
 ]

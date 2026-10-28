@@ -87,6 +87,9 @@ async function boot(data = catalog, query = '', options = {}) {
   assert.equal(registry[0].id, 'd-localization');
   assert.equal(registry[0].repository, 'https://github.com/Yuhang-Yohoo/Geo-awared-localization');
   assert.equal(registry[0].manifest, 'https://yuhang-yohoo.github.io/Geo-awared-localization/gallery.json');
+  assert.equal(registry[1].id, 'robust-localization');
+  assert.equal(registry[1].repository, 'https://github.com/Yuhang-Yohoo/robust_localization');
+  assert.equal(registry[1].manifest, 'https://yuhang-yohoo.github.io/robust_localization/gallery.json');
   assert.equal(fs.existsSync(path.join(root, 'videos.json')), false);
   assert.equal(fs.existsSync(path.join(root, 'videos/geo-aware-localization/geo-aware-localization.mp4')), false);
 
@@ -174,23 +177,30 @@ async function boot(data = catalog, query = '', options = {}) {
   const badRegistry = await boot(catalog, '', { registry: [{ id: 'missing-manifest' }] });
   assert.equal(badRegistry.get('title').textContent, 'Unable to load gallery');
   const pageUrl = 'https://yuhang-yohoo.github.io/Supplementary-Videos/';
-  const manifest = {
+  const geoManifest = {
     id: registry[0].id, project: 'MINERVA', work: 'Geo-aware localization',
     items: [catalog[0], { id: 'd-localization-poster', title: 'Research poster', type: 'poster', src: 'paper-poster.pdf' }]
   };
-  const manifestUrl = new URL(registry[0].manifest, pageUrl).href;
+  const robustManifest = {
+    id: registry[1].id, project: 'MINERVA', work: 'Robust localization',
+    items: [{ id: 'robust-localization-final', title: 'Robust localization', type: 'video', src: 'animations/final.mp4' }]
+  };
+  const manifests = new Map([[registry[0].manifest, geoManifest], [registry[1].manifest, robustManifest]]);
   const actual = { URL, console, location: { href: pageUrl }, fetch: async url => ({ ok: true, json: async () => {
     if (url === 'sources.json') return registry;
-    assert.equal(url, manifestUrl);
-    return manifest;
+    assert.ok(manifests.has(url), `Unexpected registered work URL: ${url}`);
+    return manifests.get(url);
   }}) };
   vm.runInNewContext(loader, actual);
   const loaded = await actual.loadCatalog();
-  assert.equal(loaded.catalog.length, 2);
+  assert.equal(loaded.catalog.length, 3);
   assert.equal(loaded.unavailable, 0);
   for (const item of loaded.catalog) {
-    assert.ok(item.src.startsWith('https://yuhang-yohoo.github.io/Geo-awared-localization/'));
+    const base = item.work === 'Robust localization' ? 'https://yuhang-yohoo.github.io/robust_localization/' : 'https://yuhang-yohoo.github.io/Geo-awared-localization/';
+    assert.ok(item.src.startsWith(base));
   }
+  assert.equal(loaded.catalog.find(item => item.id === 'robust-localization-final').src,
+    'https://yuhang-yohoo.github.io/robust_localization/animations/final.mp4');
   assert.equal(fs.existsSync(path.join(root, 'content/d-localization/gallery.json')), false);
   console.log('Passed: remote catalog loading and media resolution, project/work filters, mixed video/image/PDF items, media cleanup, current and legacy links, partial/offline sources, empty and invalid catalogs.');
 })().catch(error => { console.error(error); process.exitCode = 1; });

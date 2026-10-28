@@ -1,6 +1,6 @@
 # Research Gallery
 
-A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **Geo-aware localization**. Each work manages and publishes its selected content from its own repository. This public repository contains the gallery interface and source registry.
+A research gallery of videos and posters, organized by umbrella project and individual work. The current project is **MINERVA**, containing **Geo-aware localization** and **Robust localization**. Each work manages and publishes its selected content from its own repository. This public repository contains the gallery interface and source registry.
 
 Website: https://yuhang-yohoo.github.io/Supplementary-Videos/
 
@@ -24,6 +24,11 @@ To save the SVG, right-click the download link and choose **Save link as…**.
     "id": "d-localization",
     "repository": "https://github.com/Yuhang-Yohoo/Geo-awared-localization",
     "manifest": "https://yuhang-yohoo.github.io/Geo-awared-localization/gallery.json"
+  },
+  {
+    "id": "robust-localization",
+    "repository": "https://github.com/Yuhang-Yohoo/robust_localization",
+    "manifest": "https://yuhang-yohoo.github.io/robust_localization/gallery.json"
   }
 ]
 ```
@@ -34,12 +39,16 @@ The repository URL is management metadata and is not rendered in the gallery int
 
 Update the asset or its entry in `gallery.json` in the **work repository**, then commit and push to its `main` branch. Its **Publish gallery content** GitHub Actions workflow tests and deploys the approved catalog and media directly to that repository's Pages site. Once deployment completes, visitors see the updates on reloading the gallery. No local publishing script, media copy, or commit in this gallery repository is needed.
 
-The two active repositories have these responsibilities:
+The repositories have these responsibilities:
 
 ```text
 Geo-awared-localization (private repository)
   -> GitHub Actions publishes only gallery.json, video, poster, and .nojekyll
   -> https://yuhang-yohoo.github.io/Geo-awared-localization/
+
+robust_localization (private repository)
+  -> GitHub Actions publishes only gallery.json, animations/final.mp4, and .nojekyll
+  -> https://yuhang-yohoo.github.io/robust_localization/
 
 Supplementary-Videos (public gallery)
   -> index.html, assets/, sources.json
@@ -71,7 +80,7 @@ Posters use `"type": "poster"` and can point to an image or a PDF. The Project d
 
 Publish the new work's `gallery.json` and selected media from its repository's Pages site, then register its unique ID, source repository URL, and published catalog URL in `sources.json`. The catalog's `id` must match the registered source ID. Keep item IDs unique across all works. Relative catalog paths and other HTTPS hosts remain supported; cross-origin hosts must allow this gallery to fetch their JSON.
 
-The Geo-aware localization repository remains private. Its workflow publishes only the explicitly approved catalog, video, poster, and empty `.nojekyll`, using GitHub's temporary Pages deployment token. The manuscript, LaTeX sources, graphics directory, and repository metadata remain private. See `GALLERY.md` in the work repository for the exact allowlist. No separate delivery repository, deploy key, or cross-repository secret is needed.
+The work repositories remain private. Each workflow publishes only its explicitly selected assets using GitHub's temporary Pages deployment token. Geo-aware localization publishes its catalog, video, poster, and empty `.nojekyll`; Robust localization publishes its catalog, `animations/final.mp4`, and empty `.nojekyll`. Other research material and repository sources remain private. See `GALLERY.md` in each work repository for its exact allowlist. No separate delivery repository, deploy key, or cross-repository secret is needed.
 
 Keep IDs stable so shared links continue to work. Link to any item with `?item=<id>`; existing `?video=<id>` links are also supported:
 
